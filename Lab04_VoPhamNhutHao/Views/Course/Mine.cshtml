@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Lab04_VoPhamNhutHao.Models.Course>
+
+@{
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mine</h2>
+
+<div class="row">
+    <ul class="course">
+        @foreach (var course in Model)
+        {
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @course.DateTime.ToString("MM")
+                    </div>
+                    <div class="day">
+                        @course.DateTime.ToString("dd")
+                    </div>
+                </div>
+                <div class="details">
+                    <span class="lecture">
+                        @course.Name
+                    </span>
+                    <span class="category">
+                        @course.Category.Name
+
+                    </span>
+                </div>
+                <div class="action">
+                    <a href="@Url.Action("Edit","Course",new {id = course.Id })">Edit</a>
+                    <a href="@Url.Action("Delete","Course",new {id = course.Id })">Delete</a>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+<style>
+    li {
+        display: flex;
+    }
+
+    .course {
+        list-style: none;
+    }
+
+        .course > li {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+            .course > li .date {
+                text-align: center;
+                background-color: #d41d50;
+                color: white;
+                width: 60px;
+                border-radius: 8px;
+            }
+
+            .course > li .details {
+                position: absolute;
+                top: 0;
+                left: 70px;
+                margin-left: 10px;
+            }
+
+            .course > li .action {
+                display: none;
+                left: 170px;
+                top: 20px;
+                position: absolute;
+            }
+
+            .course > li:hover .action {
+                display: block;
+            }
+</style>
